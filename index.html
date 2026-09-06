@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#72c95c" />
+  <meta name="description" content="사진과 정보를 넣어 반려동물 프로필 카드를 만들고 PNG로 저장하세요." />
+  <title>반려동물 프로필 카드 만들기</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Jua&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="workspace">
+    <section class="editor-panel" aria-labelledby="editor-title">
+      <div class="panel-heading">
+        <p class="eyebrow">PET CARD STUDIO</p>
+        <h1 id="editor-title">우리 아이 카드 만들기</h1>
+        <p>정보를 입력하면 카드에 바로 반영돼요.</p>
+      </div>
+
+      <form id="pet-form">
+        <div class="field photo-field">
+          <label for="photo">사진</label>
+          <label class="file-button" for="photo">사진 선택</label>
+          <input id="photo" type="file" accept="image/*" />
+          <span id="photo-name">기본 예시 사진</span>
+        </div>
+
+        <div class="field-grid">
+          <div class="field wide">
+            <label for="pet-name">이름</label>
+            <input id="pet-name" type="text" value="버니" maxlength="10" />
+          </div>
+          <fieldset class="field gender-field">
+            <legend>성별</legend>
+            <div class="segmented">
+              <label><input type="radio" name="gender" value="♀" checked /><span>여아 ♀</span></label>
+              <label><input type="radio" name="gender" value="♂" /><span>남아 ♂</span></label>
+            </div>
+          </fieldset>
+          <div class="field wide">
+            <label for="species">종류</label>
+            <input id="species" type="text" value="크레스티드 게코" maxlength="24" />
+          </div>
+          <div class="field">
+            <label for="birthday">생일</label>
+            <input id="birthday" type="date" value="2024-08-23" />
+          </div>
+          <div class="field">
+            <label for="adoption-day">입양일</label>
+            <input id="adoption-day" type="date" value="2025-06-29" />
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="secondary" id="reset-button" type="button">처음으로</button>
+          <button class="primary" id="download-button" type="button">PNG 저장</button>
+        </div>
+        <p class="privacy-note">사진과 입력 내용은 서버로 전송되지 않아요.</p>
+      </form>
+    </section>
+
+    <section class="preview-panel" aria-labelledby="preview-title">
+      <div class="preview-heading">
+        <h2 id="preview-title">미리보기</h2>
+        <span>1080 × 1620</span>
+      </div>
+      <div class="canvas-shell">
+        <canvas id="pet-card" width="1080" height="1620" aria-label="반려동물 프로필 카드 미리보기"></canvas>
+      </div>
+    </section>
+  </main>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
