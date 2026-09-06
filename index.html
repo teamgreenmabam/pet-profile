@@ -9,11 +9,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum:wght@400;700&family=Jua&display=swap" rel="stylesheet" />
-  <link rel="preload" href="gangwon-ttonton.ttf" as="font" type="font/ttf" crossorigin />
-  <link rel="preload" href="changwon-asac.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="./gangwon-ttonton.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="./changwon-asac.ttf" as="font" type="font/ttf" crossorigin />
   <style>
-    @font-face { font-family:'GangwonTteunTteun'; src:url('gangwon-ttonton.ttf') format('truetype'); font-weight:800; font-style:normal; font-display:block; }
-    @font-face { font-family:'ChangwonAsac'; src:url('changwon-asac.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:block; }
+    @font-face { font-family:'GangwonTteunTteun'; src:url('./gangwon-ttonton.ttf') format('truetype'); font-weight:800; font-style:normal; font-display:block; }
+    @font-face { font-family:'ChangwonAsac'; src:url('./changwon-asac.ttf') format('truetype'); font-weight:700; font-style:normal; font-display:block; }
     :root { --ink:#123c1b; --green:#66c65a; --mint:#eaf9e4; --line:#d8ead3; --panel:#fff; --bg:#f3f7f1; }
     * { box-sizing:border-box; }
     body { margin:0; min-width:320px; background:radial-gradient(circle at 10% 5%,#e7f8df 0,transparent 28rem),var(--bg); color:var(--ink); font-family:"Gowun Dodum",sans-serif; }
@@ -286,8 +286,8 @@
 
     document.querySelector('#reset').addEventListener('click',()=>{Object.keys(el).forEach(key=>{if(defaults[key]!==undefined)el[key].value=defaults[key]});document.querySelector(`input[name="gender"][value="${defaults.gender}"]`).checked=true;el.photo.value='';customPhoto=false;photoZoom=1;photoOffsetX=0;photoOffsetY=0;zoomInput.value='1';zoomValue.textContent='100%';document.querySelector('#photo-name').textContent='카드 원본 예시';draw()});
     const cardFontsReady=Promise.all([
-      new FontFace('GangwonTteunTteun','url("gangwon-ttonton.ttf")',{weight:'800',style:'normal'}).load(),
-      new FontFace('ChangwonAsac','url("changwon-asac.ttf")',{weight:'700',style:'normal'}).load()
+      new FontFace('GangwonTteunTteun','url("./gangwon-ttonton.ttf")',{weight:'800',style:'normal'}).load(),
+      new FontFace('ChangwonAsac','url("./changwon-asac.ttf")',{weight:'700',style:'normal'}).load()
     ]).then(fonts=>{fonts.forEach(font=>document.fonts.add(font));return document.fonts.ready});
     document.querySelector('#save').addEventListener('click',async()=>{try{await cardFontsReady}catch{toast('폰트 파일을 확인해 주세요.');return}draw();const link=document.createElement('a'),safe=(el.name.value||'pet').replace(/[\\/:*?"<>|]/g,'-');link.download=`${safe}-profile-card.png`;link.href=canvas.toDataURL('image/png');link.click();toast('PNG를 저장했어요.')});
     function toast(message){const box=document.querySelector('#toast');box.textContent=message;box.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>box.classList.remove('show'),2100)}
