@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="반려동물 기본 정보 입력 폼">
+  <title>반려동물 정보</title>
+  <style>
+    :root { --background:#f7f8f5; --text:#172017; --border:#d9ddd7; --focus:#496d52; font-family:Pretendard,"Noto Sans KR",system-ui,-apple-system,"Segoe UI",sans-serif; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--background); color:var(--text); font-size:16px; }
+    main { width:100%; min-height:100svh; padding:14px 20px 40px; }
+    form { width:100%; display:grid; gap:18px; }
+    .field { display:grid; gap:7px; }
+    label { font-size:1rem; line-height:1.15; font-weight:800; }
+    input, select, textarea { width:100%; min-height:50px; padding:13px 14px; border:1px solid var(--border); border-radius:14px; background:#fff; color:#111; font:inherit; }
+    textarea { min-height:96px; resize:vertical; }
+    input:focus, select:focus, textarea:focus { outline:3px solid rgba(73,109,82,.16); border-color:var(--focus); }
+    button { width:100%; min-height:52px; border:0; border-radius:14px; background:#315d42; color:#fff; font:inherit; font-weight:800; cursor:pointer; }
+    button:hover { background:#244833; }
+    #status { min-height:22px; margin:-8px 0 0; color:#315d42; text-align:center; font-weight:700; }
+    @media (max-width:520px) { main { padding:14px 12px 32px; } form { gap:16px; } }
+  </style>
+</head>
+<body>
+  <main>
+    <form id="pet-form">
+      <div class="field">
+        <label for="pet-name">이름</label>
+        <input id="pet-name" name="name" type="text" value="버니" maxlength="20" required>
+      </div>
+      <div class="field">
+        <label for="pet-gender">성별</label>
+        <select id="pet-gender" name="gender" required>
+          <option value="암컷" selected>♀ 암컷</option>
+          <option value="수컷">♂ 수컷</option>
+          <option value="모름">성별 모름</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="pet-species">종류</label>
+        <input id="pet-species" name="species" type="text" value="크레스티드 게코" maxlength="30" required>
+      </div>
+      <div class="field">
+        <label for="pet-birthday">생일</label>
+        <input id="pet-birthday" name="birthday" type="text" value="24.08.23" placeholder="24.08.23" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="pet-adoption">입양일</label>
+        <input id="pet-adoption" name="adoption" type="text" placeholder="24.09.01" inputmode="numeric">
+      </div>
+      <div class="field">
+        <label for="pet-note">메모</label>
+        <textarea id="pet-note" name="note" maxlength="200" placeholder="좋아하는 것, 성격 등을 적어 주세요."></textarea>
+      </div>
+      <button type="submit">저장하기</button>
+      <p id="status" role="status" aria-live="polite"></p>
+    </form>
+  </main>
+  <script>
+    const form=document.querySelector('#pet-form');
+    const status=document.querySelector('#status');
+    const saved=localStorage.getItem('petProfile');
+    if(saved){try{const data=JSON.parse(saved);Object.entries(data).forEach(([name,value])=>{if(form.elements[name])form.elements[name].value=value;});}catch(error){localStorage.removeItem('petProfile');}}
+    form.addEventListener('submit',(event)=>{event.preventDefault();localStorage.setItem('petProfile',JSON.stringify(Object.fromEntries(new FormData(form))));status.textContent='저장했어요.';window.setTimeout(()=>{status.textContent='';},2200);});
+  </script>
+</body>
+</html>
