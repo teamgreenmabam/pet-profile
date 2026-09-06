@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="반려동물의 기본 정보를 기록하는 프로필 폼">
+  <title>반려동물 프로필</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="pet-form-card" aria-labelledby="page-title">
+      <header class="card-header">
+        <p class="eyebrow">PET PROFILE</p>
+        <h1 id="page-title">우리 아이를 소개해 주세요</h1>
+        <p>기본 정보를 입력하면 아래에서 프로필을 바로 확인할 수 있어요.</p>
+      </header>
+
+      <form id="pet-form">
+        <div class="field">
+          <label for="pet-name">이름</label>
+          <input id="pet-name" name="name" type="text" value="버니" maxlength="20" required>
+        </div>
+
+        <div class="field">
+          <label for="pet-gender">성별</label>
+          <select id="pet-gender" name="gender" required>
+            <option value="암컷" selected>♀ 암컷</option>
+            <option value="수컷">♂ 수컷</option>
+            <option value="모름">성별 모름</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="pet-species">종류</label>
+          <input id="pet-species" name="species" type="text" value="크레스티드 게코" maxlength="30" required>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="pet-birthday">생일</label>
+            <input id="pet-birthday" name="birthday" type="date" value="2024-08-23">
+          </div>
+          <div class="field">
+            <label for="pet-adoption">입양일</label>
+            <input id="pet-adoption" name="adoption" type="date">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pet-note">한 줄 소개 <span>(선택)</span></label>
+          <textarea id="pet-note" name="note" rows="3" maxlength="100" placeholder="좋아하는 것, 성격 등을 적어 주세요."></textarea>
+        </div>
+
+        <button type="submit">프로필 저장</button>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+      </form>
+
+      <article class="preview" aria-labelledby="preview-title">
+        <div class="avatar" aria-hidden="true">🦎</div>
+        <div>
+          <p class="preview-label">미리보기</p>
+          <h2 id="preview-title">버니</h2>
+          <p id="preview-summary">암컷 · 크레스티드 게코</p>
+          <p id="preview-dates">생일 2024. 8. 23.</p>
+          <p id="preview-note" class="preview-note"></p>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
